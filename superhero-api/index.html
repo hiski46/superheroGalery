@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    
+    <!-- chartJs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">Cari Superhero</h4>
+                <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Contact</h4>
+                <ul class="list-unstyled">
+                  <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                  <li><a href="#" class="text-white">Like on Facebook</a></li>
+                  <li><a href="#" class="text-white">Email me</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark shadow-sm">
+          <div class="container">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              <strong>Super Hero Album</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+      
+    <main>
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light">Cari Superhero</h1>
+              <p class="lead text-muted">Anda harus memasukkan nama superhero dengan lengkap</p>
+              <div class="input-group mb-3">
+                <span id="cari" class="input-group-text bg-primary text-white" id="inputGroup-sizing-default">Cari</span>
+                <input id="key"  type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
+          </div>
+        </section>
+      
+        <div class="album py-5 bg-light" >
+          <div class="container">
+            <div id="content" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+              
+              </div>
+            </div>
+        </div>
+
+        
+    </main>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+    
+    <script>
+      $(document).ready(function(){
+        tampilSemua()
+        $('#cari').click(function() {
+          let key = $('#key').val()
+          console.log(key);
+          if (key==='') {
+            tampilSemua()
+          }else{
+            tampilCari(key)
+          }
+        })
+
+        $('#cari').hover(function(){
+          $(this).css('cursor','pointer');
+        })
+      })
+     
+     
+      function tampilSemua() {
+        const settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://superhero-search.p.rapidapi.com/api/heroes",
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Host": "superhero-search.p.rapidapi.com",
+                "X-RapidAPI-Key": "506ccc84ddmshb0d87a6f9b6e6ccp14f747jsn8b7f0eb6e6e8"
+            }
+        };
+
+        $.ajax(settings).done(function (response) {
+            superhero = JSON.parse(response)
+          // 
+            let html ='';
+            superhero.forEach(s => {
+                let powerStats=s['powerstats']
+                let str_powerStats = JSON.stringify(powerStats);
+                let alias = s['biography']['aliases'].join('/')
+                html += `<div class="col">
+                <div class="card shadow-sm" data-bs-toggle="modal" data-bs-target="#exampleModal`+s['id']+`" onClick=makeChart(`+str_powerStats+`,`+s['id']+`)>
+                    <div class="ratio ratio-1x1">
+                        <img id="superhero-img" src="`+s['images']['lg']+`" alt="" width="100%" height="225" srcset="" style="">
+                    </div>
+      
+                  <div class="card-body text-white" style="margin-buttom: 10px; bottom:0;  position: absolute;  width: 100%; background:rgba(0,0,0,0.6);">
+                            <p>
+                                <h3 class="card-title" style="display: inline;">`+s['name']+`</h3> <span id="fullname">`+s['biography']['fullName']+`</span>
+                            </p>
+                        <small id="alias" class="text-white">`+alias+`</small>
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="exampleModal`+s['id']+`" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">`+s['name']+`</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="ratio ratio-1x1">
+                                <img id="superhero-img-modal" src="`+s['images']['lg']+`" alt="" srcset="">
+                            </div>
+                        </div>
+                        
+                        <div class="col-8">
+                            <div class="chart-container" >
+                                <h1 id="name"></h1>
+                                <canvas id="myChart`+s['id']+`"></canvas>
+                              </div>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row mt-2">
+                                <div class="col-8">
+                                    <table >
+                                        <tbody>
+                                            <tr><td class="align-top"><small>Full Name</small></td> <td class="ps-2" id="fullName-modal"><small>`+s['biography']['fullName']+`</small></td></tr>
+                                            <tr><td class="align-top"><small>Place of Birth</small></td> <td class="ps-2" id="placeOfBirth"><small>`+s['biography']['placeOfBirth']+`</small></td></tr>
+                                            <tr><td class="align-top"><small>Base</small></td> <td class="ps-2" id="base"><small>`+s['work']['base']+`</small></td></tr>
+                                            <tr><td class="align-top"><small>Occupation</small></td> <td class="ps-2" id="occupation"><small>`+s['work']['occupation']+`</small></td></tr>    
+                                            <tr><td class="align-top"><small>Group Affiliation</small></td> <td class="ps-2" id="groupAffiliation"><small>`+s['connections']['groupAffiliation']+`</small></td></tr>    
+                                            <tr><td class="align-top"><small>Relatives</small></td> <td class="ps-2" id="relatives"><small>`+s['connections']['relatives']+`</small></td></tr>    
+                                        </tbody>
+                                    </table>
+                                    <p><small></small></p>
+                                </div>
+                                <div class="col-4">
+                                    <table >
+                                        <tbody>
+                                            <tr><td class="align-top"><small>Gender</small></td> <td class="ps-2" id="gender"><small>`+s['appearance']['gender']+`</small></td></tr>
+                                            <tr><td class="align-top"><small>Height</small></td> <td class="ps-2" id="height"><small>`+s['appearance']['height'][1]+`</small></td></tr>
+                                            <tr><td class="align-top"><small>weight</small></td> <td class="ps-2" id="weight"><small>`+s['appearance']['weight'][1]+`</small></td></tr>
+                                            <tr><td class="align-top"><small>Hair Color</small></td> <td class="ps-2" id="hair-color"><small>`+s['appearance']['hairColor']+`</small></td></tr>
+                                            <tr><td class="align-top"><small>Eye Celor</small></td> <td class="ps-2" id="eye-color"><small>`+s['appearance']['eyeColor']+`</small></td></tr>
+                                            <tr><td class="align-top"><small>Race</small></td> <td class="ps-2" id="race"><small>`+s['appearance']['race']+`</small></td></tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>`;
+          
+        });
+        $('#content').html(html)
+        
+      });
+      }
+        
+      function makeChart(powerStats, id) {
+          const labels = Object.keys(powerStats)
+              const data = {
+                  labels: labels,
+                  datasets: [{
+                      label: '',
+                      data: Object.values(powerStats),
+                      fill: true,
+                      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                      borderColor: 'rgb(54, 162, 235)',
+                      pointBackgroundColor: 'rgb(255, 99, 132)',
+                      pointBorderColor: '#fff',
+                      pointHoverBackgroundColor: '#fff',
+                      pointHoverBorderColor: 'rgb(255, 99, 132)'
+                  }]
+              };
+              const config = {
+                  type: 'radar',
+                  data: data,
+                  
+                  options: {
+                      responsive: true,
+                      maintainAspectRatio: false,
+                      elements: {
+                      line: {
+                          borderWidth: 1
+                      }
+                      },
+                      plugins:{
+                          legend:{
+                              display:false
+                          }
+                      },
+                      scales: {
+                          r: {
+                              grid: {
+                                  display: true // Removes the circulair lines
+                              },
+                              ticks: {
+                                  display: false, // Hides the labels in the middel (numbers)
+                                  beginAtZero: true,
+                                  max: 100,
+                                  min: 0,
+                                  stepSize: 50
+                              }
+                          }
+                      },
+                  },
+              };
+              const ctx = document.getElementById('myChart'+id);
+              const myChart = new Chart(
+                ctx,
+                  config
+              );
+              // myChart.destroy()
+        }
+    
+      function tampilCari(key){
+          const settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://superhero-search.p.rapidapi.com/api/?hero="+key,
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Host": "superhero-search.p.rapidapi.com",
+                "X-RapidAPI-Key": "506ccc84ddmshb0d87a6f9b6e6ccp14f747jsn8b7f0eb6e6e8"
+            },
+
+        };
+        $.ajax(settings).done(function (response) {
+          if(response=='Hero Not Found'){
+            $('#content').html(response)
+          }else{
+
+            let s = JSON.parse(response)
+            
+              let html ='';
+              
+                  let powerStats=s['powerstats']
+                  let str_powerStats = JSON.stringify(powerStats);
+                  let alias = s['biography']['aliases'].join('/')
+                  html += `<div class="col">
+                  <div class="card shadow-sm" data-bs-toggle="modal" data-bs-target="#exampleModal`+s['id']+`" onClick=makeChart(`+str_powerStats+`,`+s['id']+`)>
+                      <div class="ratio ratio-1x1">
+                          <img id="superhero-img" src="`+s['images']['lg']+`" alt="" width="100%" height="225" srcset="" style="background:rgba(0,0,0,0.6);">
+                      </div>
+                      <div class="card-body text-white" style="bottom:0; position: absolute;  width: 100%; background:rgba(0,0,0,0.6);">
+                                <p>
+                                    <h3 class="card-title" style="display: inline;">`+s['name']+`</h3> <span id="fullname">`+s['biography']['fullName']+`</span>
+                                </p>
+                            <small id="alias" class="text-white">`+alias+`</small>
+    
+                      </div>
+        
+                  </div>
+                </div>
+                <div class="modal fade" id="exampleModal`+s['id']+`" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">`+s['name']+`</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="row">
+                          <div class="col-4">
+                              <div class="ratio ratio-1x1">
+                                  <img id="superhero-img-modal" src="`+s['images']['lg']+`" alt="" srcset="">
+                              </div>
+                          </div>
+                          
+                          <div class="col-8">
+                              <div class="chart-container" >
+                                  <h1 id="name"></h1>
+                                  <canvas id="myChart`+s['id']+`"></canvas>
+                                </div>
+                              </div>
+                      </div>
+                      <div class="row">
+                          <div class="col">
+                              <div class="row mt-2">
+                                  <div class="col-8">
+                                      <table >
+                                          <tbody>
+                                              <tr><td class="align-top"><small>Full Name</small></td> <td class="ps-2" id="fullName-modal"><small>`+s['biography']['fullName']+`</small></td></tr>
+                                              <tr><td class="align-top"><small>Place of Birth</small></td> <td class="ps-2" id="placeOfBirth"><small>`+s['biography']['placeOfBirth']+`</small></td></tr>
+                                              <tr><td class="align-top"><small>Base</small></td> <td class="ps-2" id="base"><small>`+s['work']['base']+`</small></td></tr>
+                                              <tr><td class="align-top"><small>Occupation</small></td> <td class="ps-2" id="occupation"><small>`+s['work']['occupation']+`</small></td></tr>    
+                                              <tr><td class="align-top"><small>Group Affiliation</small></td> <td class="ps-2" id="groupAffiliation"><small>`+s['connections']['groupAffiliation']+`</small></td></tr>    
+                                              <tr><td class="align-top"><small>Relatives</small></td> <td class="ps-2" id="relatives"><small>`+s['connections']['relatives']+`</small></td></tr>    
+                                          </tbody>
+                                      </table>
+                                      <p><small></small></p>
+                                  </div>
+                                  <div class="col-4">
+                                      <table >
+                                          <tbody>
+                                              <tr><td class="align-top"><small>Gender</small></td> <td class="ps-2" id="gender"><small>`+s['appearance']['gender']+`</small></td></tr>
+                                              <tr><td class="align-top"><small>Height</small></td> <td class="ps-2" id="height"><small>`+s['appearance']['height'][1]+`</small></td></tr>
+                                              <tr><td class="align-top"><small>weight</small></td> <td class="ps-2" id="weight"><small>`+s['appearance']['weight'][1]+`</small></td></tr>
+                                              <tr><td class="align-top"><small>Hair Color</small></td> <td class="ps-2" id="hair-color"><small>`+s['appearance']['hairColor']+`</small></td></tr>
+                                              <tr><td class="align-top"><small>Eye Celor</small></td> <td class="ps-2" id="eye-color"><small>`+s['appearance']['eyeColor']+`</small></td></tr>
+                                              <tr><td class="align-top"><small>Race</small></td> <td class="ps-2" id="race"><small>`+s['appearance']['race']+`</small></td></tr>
+                                              
+                                          </tbody>
+                                      </table>
+                                  </div>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>`;
+            
+          
+          $('#content').html(html)
+          }
+        
+        }).fail(function(xhr, status, error) {
+          alert(xhr.responseText)
+        });
+      }
+    </script>
+
+    <script>
+        // const settings = {
+        //     "async": true,
+        //     "crossDomain": true,
+        //     "url": "https://superhero-search.p.rapidapi.com/api/?hero=spiderman",
+        //     "method": "GET",
+        //     "headers": {
+        //         "X-RapidAPI-Host": "superhero-search.p.rapidapi.com",
+        //         "X-RapidAPI-Key": "506ccc84ddmshb0d87a6f9b6e6ccp14f747jsn8b7f0eb6e6e8"
+        //     }
+        // };
+
+        // $.ajax(settings).done(function (response) {
+        //     let superhero = JSON.parse(response);
+        //     console.log(superhero)
+        //     $('#superhero-img').attr('src', superhero['images']['md'])
+        //     $('.card-title').html(superhero['name'])
+        //     $('#fullname').html('('+superhero['biography']['fullName']+')')
+        //     let alias = superhero['biography']['aliases'].join('/')
+        //     $('#alias').html(alias)
+        //     $('.modal-title').html(superhero['name'])
+        //     $('#superhero-img-modal').attr('src', superhero['images']['lg'])
+        //     $('#gender').html('<small>:'+superhero['appearance']['gender']+'</small>')
+        //     $('#height').html('<small>:'+superhero['appearance']['height'][1]+'</small>')
+        //     $('#weight').html('<small>:'+superhero['appearance']['weight'][1]+'</small>')
+        //     $('#hair-color').html('<small>:'+superhero['appearance']['hairColor']+'</small>')
+        //     $('#eye-color').html('<small>:'+superhero['appearance']['eyeColor']+'</small>')
+        //     $('#race').html('<small>:'+superhero['appearance']['race']+'</small>')
+        //     $('#fullName-modal').html('<small>:'+superhero['biography']['fullName']+'</small>')
+        //     $('#placeOfBirth').html('<small>:'+superhero['biography']['placeOfBirth']+'</small>')
+        //     $('#base').html('<small>:'+superhero['work']['base']+'</small>')
+        //     $('#occupation').html('<small>:'+superhero['work']['occupation']+'</small>')
+        //     $('#groupAffiliation').html('<small>:'+superhero['connections']['groupAffiliation']+'</small>')
+        //     $('#relatives').html('<small>:'+superhero['connections']['relatives']+'</small>')
+
+        //     let powerStats=superhero['powerstats']
+        //     const labels = Object.keys(powerStats)
+        //     const data = {
+        //         labels: labels,
+        //         datasets: [{
+        //             label: '',
+        //             data: Object.values(powerStats),
+        //             fill: true,
+        //             backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        //             borderColor: 'rgb(54, 162, 235)',
+        //             pointBackgroundColor: 'rgb(255, 99, 132)',
+        //             pointBorderColor: '#fff',
+        //             pointHoverBackgroundColor: '#fff',
+        //             pointHoverBorderColor: 'rgb(255, 99, 132)'
+        //         }]
+        //     };
+        //     const config = {
+        //         type: 'radar',
+        //         data: data,
+                
+        //         options: {
+        //             responsive: true,
+        //             maintainAspectRatio: false,
+        //             elements: {
+        //             line: {
+        //                 borderWidth: 1
+        //             }
+        //             },
+        //             plugins:{
+        //                 legend:{
+        //                     display:false
+        //                 }
+        //             },
+        //             scales: {
+        //                 r: {
+        //                     grid: {
+        //                         display: true // Removes the circulair lines
+        //                     },
+        //                     ticks: {
+        //                         display: false, // Hides the labels in the middel (numbers)
+        //                         beginAtZero: true,
+        //                         max: 100,
+        //                         min: 0,
+        //                         stepSize: 50
+        //                     }
+        //                 }
+        //             },
+        //         },
+        //     };
+        //     const myChart = new Chart(
+        //         document.getElementById('myChart'),
+        //         config
+        //     );
+        // });
+    </script>
+  </body>
+</html>
